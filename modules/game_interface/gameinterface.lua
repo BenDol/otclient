@@ -639,6 +639,11 @@ end
 function processMouseAction(menuPosition, mouseButton, autoWalkPos, lookThing, useThing, creatureThing, attackCreature)
   local keyboardModifiers = g_keyboard.getModifiers()
 
+  if useThing and keyboardModifiers == KeyboardAltModifier and (mouseButton == MouseLeftButton or mouseButton == MouseRightButton) then
+    g_game.use(useThing)
+    return true
+  end
+
   if not modules.client_options.getOption('classicControl') then
     if keyboardModifiers == KeyboardNoModifier and mouseButton == MouseRightButton then
       createThingMenu(menuPosition, lookThing, useThing, creatureThing)
